@@ -1,0 +1,50 @@
+{
+  "customers": [
+    {
+      "id": "0",
+      "name": "Iron Man",
+      "cardId": "123"
+    },
+    {
+      "id": "1",
+      "name": "Black Panther",
+      "cardId": "456"
+    },
+    {
+      "id": "2",
+      "name": "Cap America",      
+      "cardId": "789"
+    },
+    {
+      "id": "3",
+      "name": "Hulk",      
+      "cardId": "753"
+    },
+    {
+      "id": "4",
+      "name": "Ant Man",    
+      "cardId": "159"
+    }
+  ],
+  "planes": [
+    {
+      "id": "0",
+      "destination": "Paris",
+      "users":["3","4"],
+      "date": "2016-05-10T22:00:00.000Z"
+    },
+    {
+      "id": "1",
+      "destination": "Sydney",
+      "users":["2"],
+      "date": "2016-05-11T22:00:00.000Z"
+    },
+    {
+      "id": "2",
+      "destination": "Tokyo",
+      "users":["1","3"],
+      "date": "2016-05-09T22:00:00.000Z"    
+    }    
+  ]  
+  
+}

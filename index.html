@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>// Angul-Air</title>
+
+	<link href='https://fonts.googleapis.com/css?family=Raleway:400,700' rel='stylesheet' type='text/css'>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">	
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+	<link rel="stylesheet" type="text/css" href="assets/css/ngDatepicker.css">
+	<link rel="stylesheet" href="assets/css/style.css">
+
+</head>
+
+<body ng-app="planeApp" class="container">
+	
+	<h1 ><a href="index.html" class="title">// Angul-Air</a></h1>
+
+	<ul class="nav nav-tabs">
+	  <li class="active"><a data-toggle="tab" href="#home">Add Plane</a></li>
+	  <li><a data-toggle="tab" href="#menu1">Add Customer</a></li>
+	  <li><a data-toggle="tab" href="#menu2">View Trips</a></li>
+	  <li><a data-toggle="tab" href="#menu3">Export Datas</a></li>
+	</ul>
+
+
+
+
+
+<div class="controller" ng-controller="planeController">
+	<div class="tab-content">
+
+
+		<div id="home" class="tab-pane fade in active">
+
+
+
+			<!-- //////////////////////////////////////////////////
+
+				Plane Add
+
+			-->
+
+			<div class="plane-entry">
+				
+				<form novalidate name="planeentry" ng-submit="addPlane()" class="f">
+
+				  <div class="row row1">
+				  <div class="col-lg-6 form-group">
+				    <label for="">Destination</label>
+				    <input type="text" ng-autocomplete options="optionsCities" ng-model="plane.destination" ng-class="ng-untouched" class="form-control" id="" placeholder="London, Marseille, ...">
+				  </div>
+				  <div class="col-lg-6 form-group">
+				    <label for="">Date</label>
+				    <ng-datepicker type="date" ng-model="plane.date" class="form-control" id="" placeholder="" view-format="YYYY-MM-DD">
+				    </ng-datepicker>
+				  </div>			  
+				  </div>			  
+
+		  		<button type="submit" class="btn btn-success" ng-show="!isEdit">Add plane</button>
+
+		  		<button type="text" class="btn btn-info ng-hide" ng-show="isEdit" ng-click="updatePlane(plane.id)">Edit Plane</button>
+		  		<button type="text" class="btn btn-info ng-hide" ng-show="isEdit" ng-click="cancelEdit()">Cancel</button>
+				
+				<div ng-bind="msg"></div>
+
+				<div class="context" ng-bind="plane.index"></div>
+
+				</form>
+
+
+			</div>
+
+			<div class="planes-list">
+				<div class="plane-item col-lg-4 col-md-6" ng-repeat="plane in planes track by $index">
+					 <h4><span class="glyphicon glyphicon-plane" aria-hidden="true"></span>Plane.{{$index}}</h4>
+					<div class="plane-background">
+
+						<img src="http://placehold.it/100x100" alt="">
+
+						<div class="context" ng-bind="plane.destination"></div>
+						<div class="context" ng-model="plane.date" ng-bind="plane.date | date:'yyyy-MM-dd'" ></div>
+
+						<div class="contact-controls">
+							<button class="btn btn-success" ng-click="editPlane(plane.id)">Edit</button>			
+							<button class="btn btn-warning" ng-click="deletePlane(plane.id)">Delete</button>	
+
+						</div>
+
+					</div>
+				</div>					
+
+			</div>
+
+		</div>
+
+	  	<div id="menu1" class="tab-pane fade">
+
+			<!-- //////////////////////////////////////////////////
+
+				Customer Add
+
+			-->
+
+
+				<!-- <div ng-controller="customerController"> -->
+				<div class="customer-entry">
+					
+					<form novalidate name="customerentry" ng-submit="addCustomer()" class="f">
+
+					  <div class="row row1">
+					  	<div class="col-lg-6 form-group">
+					    <label for="">Name</label>
+					    <input type="text" ng-model="customer.name" ng-class="ng-untouched" class="form-control" id="" placeholder="Jane Doe">
+					  </div>
+					  <div class="col-lg-6 form-group">
+					    <label for="">Card Id</label>
+					    <input type="number" required ngMinlength="5" ngMaxlength="10" ng-model="customer.cardId" class="form-control" id="" placeholder="00 000">
+					  </div>			  
+					  </div>			  
+
+			  		<button type="text" class="btn btn-success" ng-show="!isEdit">Add Customer</button>
+
+			  		<button type="text" class="btn btn-info ng-hide" ng-show="isEdit" ng-click="updateCustomer(customer.id)">Edit Customer</button>
+			  		<button type="text" class="btn btn-info ng-hide" ng-show="isEdit" ng-click="cancelEdit()">Cancel</button>
+					
+					<div ng-bind="msg"></div>
+
+					<div class="context" ng-bind="customer.index"></div>
+
+					</form>
+
+				</div>
+
+
+				<div class="customers-list">
+					<div class="customer-item col-lg-4 col-md-6" ng-repeat="customer in customers track by $index">
+						<h4><span class="glyphicon glyphicon-user" aria-hidden="true"></span> Customer.{{customer.id}}</h4>
+						<div class="customer-background">
+
+							<img width="100px" src="https://robohash.org/{{customer.name}}?size=200x200" alt="">
+
+							<div class="context" ng-bind="customer.name"></div>
+							<div class="context" ng-bind="customer.cardId"></div>
+
+							<div class="customer-controls">
+								<button class="btn btn-success" ng-click="editCustomer($index)">Edit</button>				
+								<button class="btn btn-warning" ng-click="deleteCustomer($index)">Delete</button>				
+							</div>
+
+						</div>
+					</div>					
+
+				</div>
+
+
+
+		</div>
+
+		<div id="menu2" class="tab-pane fade">
+
+			<!-- //////////////////////////////////////////////////
+
+				Trip Add
+
+			-->
+
+
+			<div class="trip-list">
+
+				<table class="table table-hover">
+				  <thead>
+				    <tr>
+				      <th>#</th>
+				      <th>Destination</th>
+				      <th class="hidden-sm hidden-xs">Date</th>
+				      <th>Users on plane</th>
+				      <th>Set</th>
+				    </tr>
+				  </thead>
+				  <tbody>
+				    <tr ng-repeat="plane in planes track by $index">
+				      <th scope="row">{{$index}}</th>
+				      <td>{{plane.destination}}</td>
+				      <td class="hidden-sm hidden-xs">{{plane.date | date:'yyyy-MM-dd'}}</td>
+				      <td><h4 ng-repeat="item in plane.users">- {{ customers[item].name }}</h4></td>
+				      <td><button type="button" ng-click="setEditTrip($index)" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">+</button></td>
+				    </tr>
+				</table>
+				
+
+			</div>
+
+		</div>
+
+
+		<div id="menu3" class="tab-pane fade">
+		
+			<button class="btn btn-warning" ng-click="exportData()">Export All</button>	
+			<div class="exportpad"></div>
+
+		</div>
+
+
+	</div>
+
+
+	<!-- Modal -->
+	<div id="myModal" class="modal fade" role="dialog">
+	  <div class="modal-dialog">
+
+	    <!-- Modal content-->
+	    <div class="modal-content">
+	      <div class="modal-header">
+	        <button type="button" class="close" data-dismiss="modal">&times;</button>
+	        <h4 class="modal-title">Add Customer for : <b>{{planes[editPlane].destination}}</b></h4>
+	      </div>
+	      <div class="modal-body">
+	        <!-- <p>{{editPlane}}</p> -->
+
+			<div class="">
+		      <label for="sel2">Select your customers :</label>
+
+				<select class="form-control" id="sel2" multiple="true" size="10" ng-options="customer.name for customer in customers track by customer.id" ng-model="usersAdded"></select>
+
+			</div>
+
+	      </div>
+	      <div class="modal-footer">
+	        <button type="button" class="btn btn-success" ng-click="editTripFunc(editTrip)" data-dismiss="modal">Add</button>
+	        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+	      </div>
+	    </div>
+
+	  </div>
+	</div>
+
+
+
+</div>
+
+
+
+	<footer>	
+		<script src="https://code.jquery.com/jquery-2.2.3.min.js"></script>
+		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+		<script src="node_modules/angular/angular.min.js"></script>
+		<script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?libraries=places"></script>
+		<!-- <script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?libraries=places&sensor=false&key=AIzaSyBshoiD_-SIe4m0R6n5-pAx9bdz3UZjUCU"></script> -->
+		<script src="assets/js/core/app.js"></script>
+		<script src="assets/js/core/service/angulairFactory.js"></script>
+		<script src="assets/js/controller/plane-controller.js"></script>
+		<script src="assets/js/ngAutocomplete.js"></script>
+		<script src="assets/js/moment.js"></script>
+		<script src="assets/js/ngDatepicker.min.js"></script>
+	</footer>
+
+</body>
+</html>

@@ -1,0 +1,58 @@
+*{
+	padding: 0;
+	margin: 0;
+}
+
+body{
+	font-family: "Raleway";
+	font-size: 20px; 
+	background-image: url(../img/bck.jpg);
+	background-size: cover;
+    background-repeat: no-repeat;
+}
+
+h1 a{
+	font-weight: bold;
+	font-size: 1.5em;
+	color: black;
+}
+
+h1 a:hover, h1 a .title:hover{
+	text-decoration: none !important;
+}
+
+.tab-pane{
+	padding: 5px;
+	background-color: #eee;
+}
+
+.plane-background:hover, .customer-background:hover{
+	opacity: 1;
+}
+
+.plane-background, .customer-background{
+
+	background-color: white;
+    padding: 30px;
+    opacity: 1;
+}
+
+.customer-item img, .plane-item img{
+	float: left;
+	padding: 5px;
+
+}
+
+.nav, .tab-content{
+	background-color: white;
+}
+
+.tab-content{
+	opacity: 0.8;
+}
+
+
+.gi-2x{font-size: 2em;}
+.gi-3x{font-size: 3em;}
+.gi-4x{font-size: 4em;}
+.gi-5x{font-size: 5em;}

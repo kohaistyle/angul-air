@@ -1,0 +1,1 @@
+var planeApp = angular.module("planeApp", ['ngAutocomplete', 'jkuri.datepicker' ]);
