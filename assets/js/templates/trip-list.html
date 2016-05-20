@@ -1,0 +1,26 @@
+{{ tripList }}
+
+			<div class="trip-list">
+
+				<table class="table table-hover">
+				  <thead>
+				    <tr>
+				      <th>#</th>
+				      <th>Destination</th>
+				      <th class="hidden-sm hidden-xs">Date</th>
+				      <th>Users on plane</th>
+				      <th>Set</th>
+				    </tr>
+				  </thead>
+				  <tbody>
+				    <tr ng-repeat="plane in tripsList track by $index">
+				      <th scope="row">{{$index}}</th>
+				      <td>{{plane.destination}}</td>
+				      <td class="hidden-sm hidden-xs">{{plane.date | date:'yyyy-MM-dd'}}</td>
+				      <td><h4 ng-repeat="item in plane.users">- {{ customers[item].name }}</h4></td>
+				      <td><button type="button" ng-click="setEditTri({id:$index})" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">+</button></td>
+				    </tr>
+				</table>
+				
+
+			</div>

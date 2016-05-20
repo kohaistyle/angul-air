@@ -11,7 +11,46 @@ planeApp.controller("planeController", ['$scope', '$http' , '$filter', 'angulair
 	$scope.editTrip = 0;
 	$scope.usersAdded = [];
 
-	$scope.test = 'booh';
+	$scope.testing = 'Booh';
+
+	/*
+		[ start ] Modale Functions / Vars
+	*/
+
+    $scope.modalOpen = 0;
+
+	$scope.notification = {
+		name : ' // Suppression',
+		msg : 'Etes vous sur de vouloir supprimer ?'
+	};	
+
+	$scope.modalOptions = {
+		name : ' // Suppression',
+		msg : 'Etes vous sur de vouloir supprimer ?',
+		action: $scope.deleteUser,
+		params: []
+	};
+
+
+    $scope.modalCancel =  function(){
+    	
+    	console.log('closed');
+    	alert('booh');
+    };
+
+    $scope.deleteUser =  function(){
+
+    	$scope.tabArray.splice($scope.idx,1);
+   		$scope.modalOpen = 0;
+
+
+    };
+	/*
+		[ end ] Modale Functions / Vars
+	*/
+
+
+	
 
 	$scope.optionsCities = {
       types: '(cities)'
@@ -23,7 +62,6 @@ planeApp.controller("planeController", ['$scope', '$http' , '$filter', 'angulair
     $scope.customers = $angulairApi.loadCustomers();
     $scope.planes = $angulairApi.loadPlanes();
 
-    //$angulairApi.test($scope);
 
 
 		// ---------------------------------------------------------------------------
@@ -43,6 +81,7 @@ planeApp.controller("planeController", ['$scope', '$http' , '$filter', 'angulair
 
 		$scope.editCustomer = function (index){
 
+			console.log(index);
 			$angulairApi.editCustomer( $scope, index);
 
 		}

@@ -12,10 +12,25 @@
 
 </head>
 
-<body ng-app="planeApp" class="container">
+<body ng-app="planeApp"  ng-controller="planeController">
 	
-	<h1 ><a href="index.html" class="title">// Angul-Air</a></h1>
+	<!-- data-modal-confirm = nom de la directive ( - pour les camelCase ) -->
+<!-- 	<div data-modal-confirm data-confirm="confirm()" ng-hide="modalOpen" data-response="modalOpen" param="notification">
+	</div>	 -->
 
+<!-- 	<div data-modal-confirm data-confirm="confirm()" ng-hide="modalOpen" data-response="modalOpen" param="modalOptions">
+	</div> -->
+	
+	<!-- <modal-confirm person="person"></modal-confirm> -->
+
+	<div class="container">
+
+	<!-- <span class="pull-right" ng-bind="resultModale"></span>			 -->
+	<!-- <button type="text" class="btn btn-info pull-right clearfix" ng-click="modalClose=0">open</button>	 -->
+
+
+	<h1 ><a href="index.html" class="title">// Angul-Air</a></h1>
+	
 	<ul class="nav nav-tabs">
 	  <li class="active"><a data-toggle="tab" href="#home">Add Plane</a></li>
 	  <li><a data-toggle="tab" href="#menu1">Add Customer</a></li>
@@ -26,8 +41,7 @@
 
 
 
-
-<div class="controller" ng-controller="planeController">
+<div class="controller" >
 	<div class="tab-content">
 
 
@@ -71,26 +85,9 @@
 
 			</div>
 
-			<div class="planes-list">
-				<div class="plane-item col-lg-4 col-md-6" ng-repeat="plane in planes track by $index">
-					 <h4><span class="glyphicon glyphicon-plane" aria-hidden="true"></span>Plane.{{$index}}</h4>
-					<div class="plane-background">
+			<!-- PLANE directive -->
+			<div data-plane-list data-planes-list="planes"  data-edit-pla="editPlane(id)" data-delete-pla="deletePlane(id)"></div>
 
-						<img src="http://placehold.it/100x100" alt="">
-
-						<div class="context" ng-bind="plane.destination"></div>
-						<div class="context" ng-model="plane.date" ng-bind="plane.date | date:'yyyy-MM-dd'" ></div>
-
-						<div class="contact-controls">
-							<button class="btn btn-success" ng-click="editPlane(plane.id)">Edit</button>			
-							<button class="btn btn-warning" ng-click="deletePlane(plane.id)">Delete</button>	
-
-						</div>
-
-					</div>
-				</div>					
-
-			</div>
 
 		</div>
 
@@ -132,28 +129,8 @@
 
 				</div>
 
-
-				<div class="customers-list">
-					<div class="customer-item col-lg-4 col-md-6" ng-repeat="customer in customers track by $index">
-						<h4><span class="glyphicon glyphicon-user" aria-hidden="true"></span> Customer.{{customer.id}}</h4>
-						<div class="customer-background">
-
-							<img width="100px" src="https://robohash.org/{{customer.name}}?size=200x200" alt="">
-
-							<div class="context" ng-bind="customer.name"></div>
-							<div class="context" ng-bind="customer.cardId"></div>
-
-							<div class="customer-controls">
-								<button class="btn btn-success" ng-click="editCustomer($index)">Edit</button>				
-								<button class="btn btn-warning" ng-click="deleteCustomer($index)">Delete</button>				
-							</div>
-
-						</div>
-					</div>					
-
-				</div>
-
-
+				<!-- CUSTOMER directive -->
+				<div data-customer-list data-customers-list="customers" data-edit-cust="editCustomer(id)" data-delete-cust="deleteCustomer(id)"></div>
 
 		</div>
 
@@ -165,31 +142,9 @@
 
 			-->
 
+			<!-- TRIP directive -->
+			<div data-trip-list data-trips-list="planes" data-customers="customers" data-set-edit-tri="setEditTrip(id)" ></div>
 
-			<div class="trip-list">
-
-				<table class="table table-hover">
-				  <thead>
-				    <tr>
-				      <th>#</th>
-				      <th>Destination</th>
-				      <th class="hidden-sm hidden-xs">Date</th>
-				      <th>Users on plane</th>
-				      <th>Set</th>
-				    </tr>
-				  </thead>
-				  <tbody>
-				    <tr ng-repeat="plane in planes track by $index">
-				      <th scope="row">{{$index}}</th>
-				      <td>{{plane.destination}}</td>
-				      <td class="hidden-sm hidden-xs">{{plane.date | date:'yyyy-MM-dd'}}</td>
-				      <td><h4 ng-repeat="item in plane.users">- {{ customers[item].name }}</h4></td>
-				      <td><button type="button" ng-click="setEditTrip($index)" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">+</button></td>
-				    </tr>
-				</table>
-				
-
-			</div>
 
 		</div>
 
@@ -240,6 +195,22 @@
 </div>
 
 
+	<!-- [ start ] Modal Directive -->
+	<div class="row" >
+		<div class="col-lg-12">
+			<p ng-init="tabArray = [ 1,2,3,4,5,6 ]"></p>
+
+			<!-- <button ng-repeat="number in tabArray" ng-click="$parent.modalClose=0; $parent.idx=$index">Del {{ number }}</button> -->
+			<div ng-repeat="number in tabArray" >
+				<button data-modal-confirm data-modal-action="$parent.deleteUser($index)" data-modal-open="$parent.modalOpen" data-param="Voulez vous supprimer ?" data-idx="$index">
+				Del user {{ number }}
+				</button>
+			</div>			
+
+		</div>
+	</div>
+	<!-- [ end ] Modal Directive -->
+
 
 	<footer>	
 		<script src="https://code.jquery.com/jquery-2.2.3.min.js"></script>
@@ -250,10 +221,16 @@
 		<script src="assets/js/core/app.js"></script>
 		<script src="assets/js/core/service/angulairFactory.js"></script>
 		<script src="assets/js/controller/plane-controller.js"></script>
+		<script src="assets/js/core/directive/modal-confirm.js"></script>
+		<script src="assets/js/core/directive/userlist-directive.js"></script>
+		<script src="assets/js/core/directive/planelist-directive.js"></script>
+		<script src="assets/js/core/directive/triplist-directive.js"></script>
 		<script src="assets/js/ngAutocomplete.js"></script>
 		<script src="assets/js/moment.js"></script>
 		<script src="assets/js/ngDatepicker.min.js"></script>
 	</footer>
+
+</div>
 
 </body>
 </html>

@@ -1,0 +1,20 @@
+<div ng-click="modalOpen=1">
+
+	<span ng-transclude></span>
+
+	<div class="modale-hide" ng-show="modalOpen">
+	</div>
+
+		<div class="modale" ng-show="modalOpen">
+
+			<h2 ng-bind="param"></h2>
+			<h2 ng-bind="idx"></h2>
+
+			<!-- <p ng-bind="param.msg"></p> -->
+			<button type="text" ng-click="modalOpen=0" class="btn btn-danger pull-right " >cancel</button>
+			<!-- <button type="text" ng-click="modalOpen=0" class="btn btn-danger pull-right " >cancel</button> -->
+			<button type="text" ng-click="modalAction()" class="btn btn-primary pull-right " >ok</button>
+		
+	</div>	
+
+</div>

@@ -1,0 +1,21 @@
+<!-- {{ usersList }} -->
+
+<div class="customers-list">
+	<div class="customer-item col-lg-4 col-md-6" ng-repeat="customer in customersList track by $index">
+		<h4><span class="glyphicon glyphicon-user" aria-hidden="true"></span> Customer.{{customer.id}}</h4>
+		<div class="customer-background">
+
+			<img width="100px" src="https://robohash.org/{{customer.name}}?size=200x200" alt="">
+
+			<div class="context" ng-bind="customer.name"></div>
+			<div class="context" ng-bind="customer.cardId"></div>
+
+			<div class="customer-controls">
+				<button class="btn btn-success" ng-click="editCust({id:$index})">Edit</button>				
+				<button class="btn btn-warning" ng-click="deleteCust({id:$index})">Delete</button>				
+			</div>
+
+		</div>
+	</div>					
+
+</div>

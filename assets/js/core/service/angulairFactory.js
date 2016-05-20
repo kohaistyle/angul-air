@@ -121,7 +121,7 @@ return {
 
 					for (var j = 0; j < scope.planes[i].users.length; j++) {
 						//users.push($scope.usersAdded[i].id);
-						if(scope.planes[i].users[j] != id.toString() ){
+						if(scope.planes[i].users[j] != id ){
 							users.push( scope.planes[i].users[j] );
 						}
 					
@@ -131,7 +131,7 @@ return {
 					// console.log(users);
 				}
 
-				localStorage.customers = JSON.stringify(scope.customers);		
+				localStorage.planes = JSON.stringify(scope.planes);		
 			}		
 	},
 	editCustomer : function(scope,id){
